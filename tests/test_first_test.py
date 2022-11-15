@@ -1,4 +1,4 @@
-f = open("test.txt", "r")
+f = open("tests/test.txt", "r")
 
 def fact(x):
     if x >= 2:
