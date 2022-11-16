@@ -1,4 +1,4 @@
-f = open("test.txt", "r")
+f = open("tests/test.txt", "r")
 
 def fact(x):
     if x >= 2:
@@ -15,8 +15,8 @@ def fib(x):
 
 def test_answer():
   
-  list_fibo = list()
-  list_fact = list()
+  erros = list()
+  messages = list()
 
   for line in f:
       #print(line.split())
@@ -25,13 +25,23 @@ def test_answer():
         try:
           assert fact(int(number[0])) == int(number[1]) #Checa se o Fatorial bate
         except:
-          print("Cálculo do Fatorial falhou! " + str(fact(int(number[0]))) + " != " + number[1])
-          assert False
+          erros.append(line)
+          messages.append("Cálculo do Fatorial falhou! " + str(fact(int(number[0]))) + " != " + number[1])
+          #assert False
         try:
           assert fib(int(number[0])) == int(number[2]) #Checa se o Fibonacci bate
         except:
-          print("Cálculo do Fibonacci falhou! " + str(fib(int(number[0]))) + " != " + number[2])
-          assert False
+          erros.append(line)
+          messages.append("Cálculo do Fibonacci falhou! " + str(fib(int(number[0]))) + " != " + number[2])
+          #assert False
+    
+  print(messages)
+
+  if erros != []:
+    print(f"Foram encontrados {len(erros)} erro(s):")
+    for n in range(len(erros)):
+      print(messages[n])
+    assert False
 
 
 test_answer()
